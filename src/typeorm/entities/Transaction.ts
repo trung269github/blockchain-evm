@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User';
 
 @Entity()
 export class Transaction {
@@ -9,7 +10,11 @@ export class Transaction {
   @Column()
   to: string;
   @Column()
-  timestamp: string;
-  @Column()
-  amount: number;
+  timestamp: Date;
+  @Column('decimal', {precision: 38, scale: 18})
+  amount: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'id' })
+  user: User; 
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Transaction } from "./Transaction";
 
 @Entity()
 export class Block{
@@ -8,8 +9,8 @@ export class Block{
     previousHash: string;
     @Column()
     hash: string;
-    @Column()
-    transactions: string;
+    @OneToMany(() => Transaction, (transaction) => transaction.id, { cascade: true })
+    transactions: Transaction[];
     @Column()
     timestamp: string;
 

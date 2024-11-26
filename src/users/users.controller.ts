@@ -21,7 +21,7 @@ return users;
         return user;
     }
 
-    @Post('register')
+    @Post()
     async createUser(@Body() createUserDto: CreateUserDto){
         const newUser = await this.userService.createUser(createUserDto);
         return newUser;
@@ -32,4 +32,5 @@ return users;
         const user = this.userService.deleteById(Number(id));
         return user;
     }
+   
 }
